@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GameApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GameApplication.class, args);
+		var mario = new MarioGame();
+		var roadrash = new RoadRash();
+		var gameRunner = new GameRunner(roadrash);
+		gameRunner.run();
+//		SpringApplication.run(GameApplication.class, args);
 	}
 
 }
