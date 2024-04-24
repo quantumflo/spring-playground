@@ -1,4 +1,4 @@
-package com.quantumflo.game;
+package com.quantumflo.game.utils;
 
 public interface Game {
     public void up();

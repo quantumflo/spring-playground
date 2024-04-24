@@ -1,4 +1,6 @@
-package com.quantumflo.game;
+package com.quantumflo.game.utils;
+
+import com.quantumflo.game.utils.Game;
 
 public class RoadRash implements Game {
     @Override
