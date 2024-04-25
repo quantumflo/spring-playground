@@ -1,7 +1,11 @@
 package com.quantumflo.game.utils;
 
 import com.quantumflo.game.utils.Game;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
+@Qualifier("MarioQualifier")
 public class MarioGame implements Game {
     public void up() {
         System.out.println("up");
@@ -12,7 +16,7 @@ public class MarioGame implements Game {
     }
 
     public void right() {
-        System.out.println("right");
+        System.out.println("fireball");
     }
 
     public void left() {
