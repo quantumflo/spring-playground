@@ -2,9 +2,11 @@ package com.quantumflo.game.utils;
 
 import com.quantumflo.game.utils.Game;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
+@Lazy
 @Qualifier("MarioQualifier")
 public class MarioGame implements Game {
     public void up() {
