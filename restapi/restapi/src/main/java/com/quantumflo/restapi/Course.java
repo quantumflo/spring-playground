@@ -35,8 +35,8 @@ public class Course {
         this.instructor = instructor;
     }
 
-    @Override
-    public String toString() {
-        return "Course [name=" + name + ", duration=" + duration + ", instructor" + instructor + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "Course [name=" + name + ", duration=" + duration + ", instructor" + instructor + "]";
+//    }
 }
