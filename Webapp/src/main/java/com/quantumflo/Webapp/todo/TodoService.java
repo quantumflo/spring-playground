@@ -23,7 +23,7 @@ public class TodoService {
         return todos;
     }
 
-    public void addTodo(String username, String description, LocalDate targetDate, boolean done){
+    public void addTodo(String username,String description, LocalDate targetDate, boolean done){
         todos.add(new Todo( todos.size(), username, description, targetDate, done ));
     }
 
