@@ -17,6 +17,7 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
+        <pre>${error}</pre>
         <button type="submit">Login</button>
     </form>
 </body>
