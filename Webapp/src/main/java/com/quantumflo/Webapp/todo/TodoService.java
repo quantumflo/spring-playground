@@ -11,46 +11,31 @@ import java.util.function.Predicate;
 @Service
 public class TodoService {
     private static List<Todo> todos = new ArrayList<>();
+    private TodoRepository todoRepository;
 
-    static {
-        todos.add(new Todo(1, "Udemy","Learn AWS",
-                LocalDate.now().plusYears(1), false ));
-        todos.add(new Todo(2, "Datacamp","Learn DevOps",
-                LocalDate.now().plusYears(2), false ));
-        todos.add(new Todo(3, "Courseera","Learn Full Stack Development",
-                LocalDate.now().plusYears(3), false ));
+    public TodoService( TodoRepository todoRepository ) {
+        this.todoRepository = todoRepository;
     }
 
     public List<Todo> findByUsername(String username){
-        Predicate<Todo> predicate =
-                todo -> todo.getUsername().equalsIgnoreCase(username);
-        return todos.stream().filter(predicate).toList();
+        return todoRepository.findByUsername(username);
     }
-    public void addTodo(String username,String description, LocalDate targetDate, boolean done){
-        todos.add(new Todo( todos.size()+1, username, description, targetDate, done ));
+
+    public void addTodo(Todo todo){
+        todoRepository.save(todo);
     }
 
     public void deleteById(int id) {
-        //todo.getId() == id
-        // todo -> todo.getId() == id
-        Predicate<? super Todo> predicate = todo -> todo.getId() == id;
-        todos.removeIf(predicate);
+        todoRepository.deleteById(id);
     }
 
     public Todo findById(int id) {
-        Predicate<? super Todo> predicate = todo -> todo.getId() == id;
-        Todo todo = todos.stream().filter(predicate).findFirst().get();
+        Todo todo = todoRepository.findById(id).get();
         return todo;
     }
 
-    public void updateTodos(@Valid Todo updatedTodo) {
-        for (int i = 0; i < todos.size(); i++) {
-            Todo todo = todos.get(i);
-            if( todo.getId() == updatedTodo.getId() ) {
-                todos.set(i, updatedTodo);
-                break;
-            }
-        }
+    public void updateTodos( Todo updatedTodo) {
+        todoRepository.save(updatedTodo);
     }
 
 }

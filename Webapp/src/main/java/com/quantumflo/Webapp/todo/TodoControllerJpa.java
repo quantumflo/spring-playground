@@ -1,6 +1,4 @@
 package com.quantumflo.Webapp.todo;
-import java.time.LocalDate;
-import java.util.List;
 
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -8,19 +6,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.util.List;
 
 
-
-public class TodoController {
-
-    public TodoController(TodoService todoService) {
-        super();
+@Controller
+public class TodoControllerJpa {
+    private TodoService todoService;
+    public TodoControllerJpa(TodoService todoService ) {
         this.todoService = todoService;
     }
-
-    private TodoService todoService;
-
 
     @RequestMapping("todos")
     public String listAllTodos(ModelMap model) {
@@ -38,17 +38,17 @@ public class TodoController {
         return "todo";
     }
 
-//    @RequestMapping(value="add-todo", method = RequestMethod.POST)
-//    public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
-//
-//        if(result.hasErrors()) {
-//            return "todo";
-//        }
-//        String username = getLoggedinUsername();
-//        todoService.addTodo(username, todo.getDescription(),
-//                todo.getTargetDate(), false);
-//        return "redirect:todos";
-//    }
+    @RequestMapping(value="add-todo", method = RequestMethod.POST)
+    public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+
+        if(result.hasErrors()) {
+            return "todo";
+        }
+        String username = getLoggedinUsername();
+        todo.setUsername(username);
+        todoService.addTodo(todo);
+        return "redirect:todos";
+    }
 
     @RequestMapping("delete-todo")
     public String deleteTodo(@RequestParam int id) {
@@ -67,9 +67,9 @@ public class TodoController {
     @PostMapping("update-todo")
     public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 
-//        if(result.hasErrors()) {
-//            return "todo";
-//        }
+        if(result.hasErrors()) {
+            return "todo";
+        }
         String username = getLoggedinUsername();
         todo.setUsername(username);
         todoService.updateTodos(todo);
