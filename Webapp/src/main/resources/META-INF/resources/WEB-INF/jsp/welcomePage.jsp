@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Welcome to Tasker </h2>
-        <div>
-            <label for="username"> Hello ${name}</label>
-            <a href="todos">Manage</a> your todos
-
-        </div>
-</body>
-</html>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
+<div class="container">
+	<h1>Welcome ${name}</h1>
+<a href="list-todos" class="btn btn-primary">Manage your todos</a>
+</div>
+<%@ include file="common/footer.jspf" %>
