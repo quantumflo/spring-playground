@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TodoController {
@@ -46,7 +43,33 @@ public class TodoController {
         }
         String username = (String)model.get("name");
         todoService.addTodo(username, todo.getDescription(),
-                LocalDate.now().plusYears(1), false);
+                todo.getTargetDate(), false);
+        return "redirect:todos";
+    }
+
+    @RequestMapping("delete-todo")
+    public String deleteTodo(@RequestParam int id) {
+        todoService.deleteById(id);
+        return "redirect:todos";
+
+    }
+
+    @RequestMapping("update-todo")
+    public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+        Todo todo = todoService.findById(id);
+        model.addAttribute("todo", todo);
+        return "todo";
+    }
+
+    @PostMapping("update-todo")
+    public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+
+//        if(result.hasErrors()) {
+//            return "todo";
+//        }
+        String username = (String)model.get("name");
+        todo.setUsername(username);
+        todoService.updateTodos(todo);
         return "redirect:todos";
     }
 

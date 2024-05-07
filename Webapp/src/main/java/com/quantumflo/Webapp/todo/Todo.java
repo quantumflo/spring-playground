@@ -8,6 +8,13 @@ import java.time.LocalDate;
 
 public class Todo {
 
+    private int id;
+    private String username;
+    @Size(min=10, message="Enter atleast 10 characters")
+    private String description;
+    private LocalDate targetDate;
+    private boolean done;
+
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.username = username;
@@ -15,13 +22,6 @@ public class Todo {
         this.targetDate = targetDate;
         this.done = done;
     }
-
-    private int id;
-    private String username;
-    @Size(min=10, message="Enter atleast 10 characters")
-    private String description;
-    private LocalDate targetDate;
-    private boolean done;
 
     public int getId() {
         return id;
