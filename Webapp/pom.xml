@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.quantumflo</groupId>
-	<artifactId>Webapp</artifactId>
+	<artifactId>tusker-webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Webapp</name>
 	<description>web app for Spring Boot</description>
